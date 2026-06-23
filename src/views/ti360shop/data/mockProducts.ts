@@ -1,0 +1,107 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import { ProductModel } from '../types';
+
+export const MOCK_PRODUCTS: ProductModel[] = [
+  {
+    id: 'p1',
+    name: 'Accento Portland Cement - 50kg',
+    description: 'High-strength Grade 53 Portland cement for residential and commercial construction.',
+    price: 450,
+    mrp: 520,
+    discountPercent: 13,
+    gstPercent: 28,
+    image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=300&h=300&auto=format&fit=crop',
+    variants: ['50kg'],
+    vendorIds: ['v1'],
+    vendorBusinessName: 'Terra Materials Pvt Ltd',
+    category: 'Cement',
+    b2b: {
+      available: true,
+      price: 380,
+      mrp: 520,
+      discountPercent: 27,
+      moq: 50,
+      tiers: [
+        { minQty: 50, maxQty: 199, unitPrice: 380, discountPercent: 27 },
+        { minQty: 200, maxQty: 499, unitPrice: 350, discountPercent: 32 },
+        { minQty: 500, maxQty: null, unitPrice: 325, discountPercent: 37 },
+      ],
+    },
+  },
+  {
+    id: 'p2',
+    name: 'JSW Steel TMT Bars - 10mm',
+    description: 'Fe-550D TMT bars with superior bonding and anti-corrosive properties.',
+    price: 850,
+    mrp: 980,
+    discountPercent: 13,
+    gstPercent: 18,
+    image: 'https://images.unsplash.com/photo-1518709414768-a8987002db9e?q=80&w=300&h=300&auto=format&fit=crop',
+    variants: ['10mm', '12mm', '16mm'],
+    vendorIds: ['v2'],
+    vendorBusinessName: 'Bharat Steel Corp',
+    category: 'Steel',
+    b2b: {
+      available: true,
+      price: 720,
+      mrp: 980,
+      discountPercent: 26,
+      moq: 20,
+      tiers: [
+        { minQty: 20, maxQty: 99, unitPrice: 720, discountPercent: 26 },
+        { minQty: 100, maxQty: null, unitPrice: 680, discountPercent: 30 },
+      ],
+    },
+  },
+  {
+    id: 'p3',
+    name: 'Standard Red Clay Bricks',
+    description: 'Locally sourced red bricks for robust Load-bearing walls.',
+    price: 8,
+    mrp: 12,
+    discountPercent: 33,
+    gstPercent: 5,
+    image: 'https://images.unsplash.com/photo-1590069230002-705521769224?q=80&w=300&h=300&auto=format&fit=crop',
+    variants: [],
+    vendorIds: ['v1'],
+    vendorBusinessName: 'Terra Materials Pvt Ltd',
+    category: 'Bricks',
+    b2b: {
+      available: true,
+      price: 6.5,
+      mrp: 12,
+      discountPercent: 45,
+      moq: 5000,
+      tiers: [
+        { minQty: 5000, maxQty: 19999, unitPrice: 6.5, discountPercent: 45 },
+        { minQty: 20000, maxQty: null, unitPrice: 5.8, discountPercent: 51 },
+      ],
+    },
+  },
+  {
+    id: 'p4',
+    name: 'Asian Paints Apex Ultima - 20L',
+    description: 'High-gloss exterior wall paint with weather protection.',
+    price: 7500,
+    mrp: 8200,
+    discountPercent: 8,
+    gstPercent: 18,
+    image: 'https://images.unsplash.com/photo-1562184552-997c461abbe6?q=80&w=300&h=300&auto=format&fit=crop',
+    variants: ['White', 'Cream', 'Terracotta'],
+    vendorIds: ['v3'],
+    vendorBusinessName: 'Rangoli Hardware',
+    category: 'Paints',
+    b2b: {
+      available: false,
+      price: 0,
+      mrp: 0,
+      discountPercent: 0,
+      moq: 0,
+      tiers: [],
+    },
+  },
+];

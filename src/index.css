@@ -1,0 +1,591 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+@import "tailwindcss";
+
+/* Keep custom data attributes from interfering with layout. */
+[data-tf360-translating="1"] { opacity: 0.92; }
+
+/* ─── Light theme overrides ─────────────────────────────────────────────
+ *  The site is dark by default. When the user toggles to light mode via
+ *  the ThemeProvider, the <html> element gets `data-theme="light"` and
+ *  the rules below override the dark-mode Tailwind utility classes that
+ *  appear most often (bg-black, text-white, border-white/x, hex bg's).
+ *  The orange brand stays put because it reads well on both palettes.
+ * ────────────────────────────────────────────────────────────────────── */
+html[data-theme="light"] {
+  background: #f8f8f8;
+  color: #0a0a0a;
+}
+html[data-theme="light"] body {
+  background: #f8f8f8 !important;
+  color: #0a0a0a !important;
+}
+
+/* Smooth color transition so the flip feels intentional. */
+html, body, [class*="bg-"], [class*="text-"], [class*="border-"] {
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+/* Background surfaces */
+html[data-theme="light"] .bg-black,
+html[data-theme="light"] .bg-\[\#0a0807\],
+html[data-theme="light"] .bg-\[\#0a0a0a\] {
+  background-color: #f8f8f8 !important;
+}
+html[data-theme="light"] .bg-\[\#111\],
+html[data-theme="light"] .bg-\[\#0d0d0d\],
+html[data-theme="light"] .bg-\[\#141110\],
+html[data-theme="light"] .bg-\[\#1a1714\],
+html[data-theme="light"] .bg-neutral-900,
+html[data-theme="light"] .bg-neutral-800 {
+  background-color: #ffffff !important;
+}
+html[data-theme="light"] .bg-white\/5,
+html[data-theme="light"] .bg-white\/3,
+html[data-theme="light"] .bg-white\/8,
+html[data-theme="light"] .bg-white\/10,
+html[data-theme="light"] .bg-white\/15 {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+html[data-theme="light"] .bg-black\/50,
+html[data-theme="light"] .bg-black\/60,
+html[data-theme="light"] .bg-black\/70 {
+  background-color: rgba(0, 0, 0, 0.45) !important;
+}
+/* Solid dark headers/bars (e.g. shop headers use bg-black/95) -> white in light mode */
+html[data-theme="light"] .bg-black\/80,
+html[data-theme="light"] .bg-black\/90,
+html[data-theme="light"] .bg-black\/95 {
+  background-color: #ffffff !important;
+}
+
+/* Text */
+html[data-theme="light"] .text-white {
+  color: #0a0a0a !important;
+}
+html[data-theme="light"] .text-white\/90,
+html[data-theme="light"] .text-white\/85,
+html[data-theme="light"] .text-white\/80,
+html[data-theme="light"] .text-white\/70,
+html[data-theme="light"] .text-white\/65,
+html[data-theme="light"] .text-white\/60 {
+  color: rgba(10, 10, 10, 0.78) !important;
+}
+html[data-theme="light"] .text-white\/55,
+html[data-theme="light"] .text-white\/50,
+html[data-theme="light"] .text-white\/45,
+html[data-theme="light"] .text-white\/40,
+html[data-theme="light"] .text-white\/35 {
+  color: rgba(10, 10, 10, 0.55) !important;
+}
+html[data-theme="light"] .text-white\/30,
+html[data-theme="light"] .text-white\/25,
+html[data-theme="light"] .text-white\/20,
+html[data-theme="light"] .text-white\/15 {
+  color: rgba(10, 10, 10, 0.35) !important;
+}
+
+/* Nested .dark wrappers (e.g. the app shell <div class="... dark">) must NOT
+   force the dark palette when the whole site is toggled to light mode.
+   Without this, bg flips to light but --ink stays light -> invisible headings. */
+html[data-theme="light"] .dark {
+  --bg: #f8f8f8 !important;
+  --ink: #0a0a0a !important;
+  --paper: #ffffff !important;
+  --muted: rgba(10, 10, 10, 0.5) !important;
+  --line: rgba(10, 10, 10, 0.08) !important;
+  --gold-accent: #f97316 !important;
+}
+
+/* Faint white labels (below /15) also need flipping in light mode */
+html[data-theme="light"] .text-white\/10,
+html[data-theme="light"] .text-white\/5 {
+  color: rgba(10, 10, 10, 0.3) !important;
+}
+
+/* Borders */
+html[data-theme="light"] .border-white\/5,
+html[data-theme="light"] .border-white\/8,
+html[data-theme="light"] .border-white\/10,
+html[data-theme="light"] .border-white\/15,
+html[data-theme="light"] .border-white\/20 {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Footer / Navbar dark surfaces */
+html[data-theme="light"] footer.bg-black,
+html[data-theme="light"] nav.bg-black {
+  background-color: #ffffff !important;
+}
+
+/* Card-dark utility used by FeaturedPropertyDetail */
+html[data-theme="light"] .card-dark {
+  background-color: #ffffff !important;
+  color: #0a0a0a !important;
+  border-color: rgba(0,0,0,0.08) !important;
+}
+
+/* Hover states */
+html[data-theme="light"] .hover\:bg-white\/5:hover,
+html[data-theme="light"] .hover\:bg-white\/10:hover {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Grid + dot patterns sit too dark on white — soften them */
+html[data-theme="light"] .grid-pattern,
+html[data-theme="light"] .dot-pattern {
+  opacity: 0.08 !important;
+}
+
+/* Brand-glow shadows pop on white — tone down a touch */
+html[data-theme="light"] .shadow-orange-500\/20,
+html[data-theme="light"] .shadow-orange-500\/25,
+html[data-theme="light"] .shadow-orange-500\/30 {
+  --tw-shadow-color: rgba(249,115,22,0.18) !important;
+}
+
+/* ─── Light theme — inline-style overrides ─────────────────────────────
+ *  Components throughout the codebase ship inline `style={{ background:
+ *  '#1a1714' }}` props (cards, drawer surfaces, identity gradients).
+ *  CSS class overrides can't reach those, so we use attribute selectors
+ *  on the `style` value to flip the most common dark hex codes to white
+ *  / soft-cream surfaces in light mode.
+ * ────────────────────────────────────────────────────────────────────── */
+
+/* ── Scaffold (page-bg) dark hex codes → soft cream ── */
+html[data-theme="light"] [style*="#0a0807"],
+html[data-theme="light"] [style*="#0a0a0a"],
+html[data-theme="light"] [style*="#0d0d0d"],
+html[data-theme="light"] [style*="#0d0b09"],
+html[data-theme="light"] [style*="#0E1116"],
+html[data-theme="light"] [style*="#0e1116"],
+html[data-theme="light"] [style*="rgb(10, 8, 7)"],
+html[data-theme="light"] [style*="rgb(10,8,7)"],
+html[data-theme="light"] [style*="rgb(10, 10, 10)"],
+html[data-theme="light"] [style*="rgb(13, 13, 13)"] {
+  background: #f8f8f8 !important;
+  color: #0a0a0a !important;
+}
+
+html[data-theme="light"] [style*="#1a1714"],
+html[data-theme="light"] [style*="#141110"],
+html[data-theme="light"] [style*="#221d18"],
+html[data-theme="light"] [style*="#0d0b09"],
+html[data-theme="light"] [style*="#0E1116"],
+html[data-theme="light"] [style*="#16110a"],
+html[data-theme="light"] [style*="#14110d"],
+html[data-theme="light"] [style*="background: #111;"],
+html[data-theme="light"] [style*="background:#111;"],
+html[data-theme="light"] [style*="background: #2a2f3a"],
+html[data-theme="light"] [style*="background:#2a2f3a"],
+/* RGB fallbacks (some browsers/React versions normalize hex → rgb in the
+   inline style attribute) */
+html[data-theme="light"] [style*="rgb(26, 23, 20)"],
+html[data-theme="light"] [style*="rgb(26,23,20)"],
+html[data-theme="light"] [style*="rgb(20, 17, 16)"],
+html[data-theme="light"] [style*="rgb(34, 29, 24)"],
+html[data-theme="light"] [style*="rgb(17, 17, 17)"] {
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+}
+
+/* For the same nodes, also flip any white/translucent borders to dark */
+html[data-theme="light"] [style*="#1a1714"][style*="rgba(255,255,255"],
+html[data-theme="light"] [style*="#141110"][style*="rgba(255,255,255"],
+html[data-theme="light"] [style*="#1a1714"][style*="border"],
+html[data-theme="light"] [style*="#141110"][style*="border"] {
+  border-color: rgba(0,0,0,0.10) !important;
+}
+
+/* Identity-card / hero dark gradients → soft cream gradients */
+html[data-theme="light"] [style*="linear-gradient(135deg, #0F1319"],
+html[data-theme="light"] [style*="linear-gradient(135deg, #1a1714 0%, #2a221c"],
+html[data-theme="light"] [style*="linear-gradient(135deg, #1a1714 0%, #0f0d0b"],
+html[data-theme="light"] [style*="linear-gradient(135deg, #1a1714 0%, #221d18"] {
+  background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 50%, rgba(249,115,22,0.10) 100%) !important;
+  color: #0a0a0a !important;
+}
+
+/* Translucent white-on-dark surfaces → translucent black-on-light */
+html[data-theme="light"] [style*="background: rgba(255,255,255,0.02)"],
+html[data-theme="light"] [style*="background: rgba(255,255,255,0.03)"],
+html[data-theme="light"] [style*="background: rgba(255,255,255,0.04)"],
+html[data-theme="light"] [style*="background: rgba(255,255,255,0.05)"],
+html[data-theme="light"] [style*="background: rgba(255,255,255,0.06)"],
+html[data-theme="light"] [style*="background: rgba(255,255,255, 0.04)"],
+html[data-theme="light"] [style*="background: rgba(255,255,255, 0.06)"] {
+  background: rgba(0,0,0,0.04) !important;
+}
+
+/* Inline "white" text → black text */
+html[data-theme="light"] [style*="color: white"],
+html[data-theme="light"] [style*="color:white"],
+html[data-theme="light"] [style*="color: #ffffff"],
+html[data-theme="light"] [style*="color:#ffffff"],
+html[data-theme="light"] [style*="color: #fafaf7"],
+html[data-theme="light"] [style*="color:#fafaf7"],
+html[data-theme="light"] [style*="color: #ffffff'"],
+html[data-theme="light"] [style*="color: '#fff'"] {
+  color: #0a0a0a !important;
+}
+
+/* Inline borders using hairline white → light hairline */
+html[data-theme="light"] [style*="border: 1px solid rgba(255,255,255,0.08)"],
+html[data-theme="light"] [style*="border: 1px solid rgba(255,255,255,0.05)"],
+html[data-theme="light"] [style*="border: 1px solid rgba(255,255,255,0.10)"],
+html[data-theme="light"] [style*="border: 1px solid rgba(255,255,255, 0.08)"],
+html[data-theme="light"] [style*="borderColor: rgba(255,255,255,0.08)"] {
+  border-color: rgba(0,0,0,0.08) !important;
+}
+
+/* Inline semi-black backgrounds inside identity cards → light tints */
+html[data-theme="light"] [style*="background: rgba(0,0,0,0.28)"],
+html[data-theme="light"] [style*="background: rgba(0,0,0,0.35)"] {
+  background: rgba(0,0,0,0.04) !important;
+}
+
+/* Property card subtle backgrounds */
+html[data-theme="light"] [style*="background: #16110a"],
+html[data-theme="light"] [style*="background:#16110a"] {
+  background: #ffffff !important;
+}
+
+/* Properties dark scaffold + featured carousel surfaces */
+html[data-theme="light"] [style*="background: #14110d"],
+html[data-theme="light"] [style*="background:#14110d"] {
+  background: #f8f8f8 !important;
+}
+
+/* Properties surfaceHover */
+html[data-theme="light"] [style*="#28221c"],
+html[data-theme="light"] [style*="rgb(40, 34, 28)"] {
+  background: #f3f3f3 !important;
+}
+
+/* ── More Tailwind dark utilities used across Services / Shop ── */
+html[data-theme="light"] .bg-zinc-900,
+html[data-theme="light"] .bg-zinc-800,
+html[data-theme="light"] .bg-stone-900,
+html[data-theme="light"] .bg-stone-800,
+html[data-theme="light"] .bg-slate-900 {
+  background-color: #ffffff !important;
+}
+html[data-theme="light"] .bg-neutral-950 {
+  background-color: #f8f8f8 !important;
+}
+
+/* Gradient stops (used in hero overlays etc.) — soften so they don't
+   pour dark ink over the light page. */
+html[data-theme="light"] .from-black,
+html[data-theme="light"] .via-black,
+html[data-theme="light"] .to-black {
+  --tw-gradient-from: rgba(255,255,255,0.0) !important;
+  --tw-gradient-via: rgba(0,0,0,0.05) !important;
+  --tw-gradient-to: rgba(0,0,0,0.08) !important;
+}
+
+/* PropTheme text colour rgba(250, 250, 247, …) → dark inks on white */
+html[data-theme="light"] [style*="rgba(250, 250, 247, 0.92)"],
+html[data-theme="light"] [style*="rgba(250,250,247,0.92)"] {
+  color: rgba(10, 10, 10, 0.92) !important;
+}
+html[data-theme="light"] [style*="rgba(250, 250, 247, 0.62)"],
+html[data-theme="light"] [style*="rgba(250,250,247,0.62)"],
+html[data-theme="light"] [style*="rgba(250, 250, 247, 0.6)"] {
+  color: rgba(10, 10, 10, 0.60) !important;
+}
+html[data-theme="light"] [style*="rgba(250, 250, 247, 0.40)"],
+html[data-theme="light"] [style*="rgba(250,250,247,0.4)"],
+html[data-theme="light"] [style*="rgba(250, 250, 247, 0.4)"] {
+  color: rgba(10, 10, 10, 0.40) !important;
+}
+html[data-theme="light"] [style*="rgba(250, 250, 247, 0.10)"],
+html[data-theme="light"] [style*="rgba(250, 250, 247, 0.08)"],
+html[data-theme="light"] [style*="rgba(250, 250, 247, 0.18)"] {
+  border-color: rgba(0, 0, 0, 0.10) !important;
+}
+
+/* Profile drawer T.inkMute / T.inkFaint translucent whites */
+html[data-theme="light"] [style*="rgba(250,250,247,0.60)"],
+html[data-theme="light"] [style*="rgba(250,250,247, 0.60)"] {
+  color: rgba(10,10,10,0.60) !important;
+}
+html[data-theme="light"] [style*="rgba(250,250,247,0.35)"] {
+  color: rgba(10,10,10,0.40) !important;
+}
+
+/* The properties hero / carousel use Cormorant Garamond white headers —
+   flip those to dark when the page is light. */
+html[data-theme="light"] [style*="color: #fafaf7"],
+html[data-theme="light"] [style*="color:#fafaf7"] {
+  color: #0a0a0a !important;
+}
+
+/* Min-height containers that wrap the dark theme — let the body bg show. */
+html[data-theme="light"] .min-h-screen.bg-black {
+  background-color: #f8f8f8 !important;
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  /* Orange-black theme */
+  --color-luxury-gold: #f97316;
+  --color-luxury-dark: #0a0a0a;
+  --color-orange-glow: rgba(249, 115, 22, 0.4);
+
+  /* RFQ component theme tokens */
+  --color-premium-dark: #0a0a0a;
+  --color-premium-slate: #374151;
+  --color-premium-bg: #f5f5f5;
+  --color-premium-cream: #ffffff;
+  --color-premium-border: rgba(0,0,0,0.10);
+  --color-amazon-yellow: #f97316;
+  --color-amazon-yellow-light: #fb923c;
+}
+
+@layer base {
+  :root {
+    --bg: #f8f8f8;
+    --ink: #0a0a0a;
+    --paper: #ffffff;
+    --muted: rgba(10, 10, 10, 0.5);
+    --line: rgba(10, 10, 10, 0.08);
+    --gold-accent: #f97316;
+  }
+
+  .dark {
+    --bg: #0a0a0a;
+    --ink: #f5f5f5;
+    --paper: #111111;
+    --muted: rgba(245, 245, 245, 0.4);
+    --line: rgba(245, 245, 245, 0.08);
+    --gold-accent: #fb923c;
+  }
+
+  body {
+    @apply bg-[var(--bg)] text-[var(--ink)] font-sans antialiased transition-colors duration-500 ease-in-out selection:bg-orange-500/30;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans;
+  }
+}
+
+/* ── Animations ── */
+@keyframes shadow-sweep {
+  0%   { text-shadow: -14px 2px 20px rgba(249,115,22,0.15), 0 1px 3px rgba(0,0,0,0.08); }
+  33%  { text-shadow:  14px 4px 32px rgba(249,115,22,0.50), 0 2px 8px rgba(0,0,0,0.12); }
+  66%  { text-shadow:   0px 8px 36px rgba(249,115,22,0.35), 0 2px 6px rgba(0,0,0,0.10); }
+  100% { text-shadow: -14px 2px 20px rgba(249,115,22,0.15), 0 1px 3px rgba(0,0,0,0.08); }
+}
+
+@keyframes shadow-sweep-gold {
+  0%   { text-shadow: -18px 2px 24px rgba(249,115,22,0.25); }
+  33%  { text-shadow:  18px 4px 40px rgba(249,115,22,0.90); }
+  66%  { text-shadow:   0px 10px 44px rgba(249,115,22,0.65); }
+  100% { text-shadow: -18px 2px 24px rgba(249,115,22,0.25); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(249,115,22,0.3), 0 0 40px rgba(249,115,22,0.1); }
+  50%       { box-shadow: 0 0 50px rgba(249,115,22,0.6), 0 0 90px rgba(249,115,22,0.25); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-18px) rotate(2deg); }
+  66%       { transform: translateY(-8px) rotate(-1deg); }
+}
+
+@keyframes float-alt {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%       { transform: translateY(15px) rotate(-2deg); }
+}
+
+@keyframes shimmer {
+  0%   { transform: translateX(-200%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes width-expand {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+@keyframes counter-in {
+  from { opacity: 0; transform: translateY(20px) scale(0.8); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.text-shadow-sweep      { animation: shadow-sweep 4s ease-in-out infinite; }
+.text-shadow-sweep-gold { animation: shadow-sweep-gold 4s ease-in-out infinite; }
+.animate-glow-pulse     { animation: glow-pulse 2.5s ease-in-out infinite; }
+.animate-float          { animation: float 5s ease-in-out infinite; }
+.animate-float-alt      { animation: float-alt 6s ease-in-out infinite; }
+.animate-shimmer        { animation: shimmer 2.5s linear infinite; }
+.animate-gradient       { animation: gradient-shift 5s ease infinite; background-size: 200% 200%; }
+.animate-spin-slow      { animation: spin-slow 12s linear infinite; }
+.animate-spin-reverse   { animation: spin-reverse 18s linear infinite; }
+.animate-reveal-up      { animation: reveal-up 0.8s ease forwards; }
+
+/* ── Utility classes ── */
+.parallax-bg {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.glass-morphism {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(135deg, #f97316 0%, #ea580c 60%, #fb923c 100%);
+}
+
+.text-gradient-white {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.6) 100%);
+}
+
+.card-luxury {
+  @apply bg-[var(--paper)] border border-[var(--line)] transition-all duration-500;
+}
+
+.card-dark {
+  background: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.4s ease;
+}
+
+.card-dark:hover {
+  border-color: rgba(249, 115, 22, 0.3);
+  box-shadow: 0 0 30px rgba(249, 115, 22, 0.08);
+}
+
+.premium-glass {
+  @apply bg-[var(--paper)]/90 backdrop-blur-xl border-b border-[var(--line)];
+}
+
+.premium-card {
+  @apply bg-[var(--paper)] border border-[var(--line)] rounded-xl transition-all duration-300;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.glow-orange {
+  box-shadow: 0 0 25px rgba(249, 115, 22, 0.45), 0 0 60px rgba(249, 115, 22, 0.15);
+}
+
+.glow-orange-sm {
+  box-shadow: 0 0 12px rgba(249, 115, 22, 0.35), 0 0 25px rgba(249, 115, 22, 0.1);
+}
+
+.border-orange-glow {
+  border: 1px solid rgba(249, 115, 22, 0.35);
+  box-shadow: 0 0 20px rgba(249, 115, 22, 0.1), inset 0 0 20px rgba(249, 115, 22, 0.02);
+}
+
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(249, 115, 22, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(249, 115, 22, 0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.grid-pattern-subtle {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.dot-pattern {
+  background-image: radial-gradient(rgba(249, 115, 22, 0.2) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+.orange-gradient-bg {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+}
+
+.orange-gradient-subtle {
+  background: linear-gradient(135deg, rgba(249,115,22,0.15) 0%, rgba(234,88,12,0.05) 100%);
+}
+
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.dark {
+  --color-premium-dark: #f5f5f5;
+  --color-premium-slate: #94a3b8;
+  --color-premium-bg: #0a0a0a;
+  --color-premium-cream: #111111;
+  --color-premium-border: rgba(245,245,245,0.08);
+}
+
+
+/* TerraInfra profile drawer palette — theme-aware tokens consumed by the
+   drawer's inline styles (ProfilePage `T`). Dark by default; the light
+   overrides flip the panel to a light surface with dark text so nothing is
+   invisible when the site is switched to light mode. */
+:root, html[data-theme="dark"] {
+  --tf-scaffold:#0a0807; --tf-surface:#141110; --tf-surfaceAlt:#1a1714;
+  --tf-hairline:rgba(255,255,255,0.08);
+  --tf-ink:#fafaf7; --tf-inkMute:rgba(250,250,247,0.60); --tf-inkFaint:rgba(250,250,247,0.35);
+  --tf-identityGrad:linear-gradient(135deg, #1a1714 0%, #2a221c 45%, #0a0807 100%);
+  --tf-headerBg:rgba(10,8,7,0.92);
+}
+html[data-theme="light"] {
+  --tf-scaffold:#ffffff; --tf-surface:#f6f6f7; --tf-surfaceAlt:#f2f2f4;
+  --tf-hairline:rgba(10,10,10,0.10);
+  --tf-ink:#0f0f0f; --tf-inkMute:rgba(10,10,10,0.62); --tf-inkFaint:rgba(10,10,10,0.42);
+  --tf-identityGrad:linear-gradient(135deg, #fff2e8 0%, #ffe6d4 45%, #fffaf6 100%);
+  --tf-headerBg:rgba(255,255,255,0.92);
+}
+/* A few drawer text nodes sit on the brand/orange or dark toast surface and
+   must stay white in BOTH themes. */
+html[data-theme="light"] .tf360-profile-drawer .text-white { color: #ffffff !important; }
+/* Inputs are light in light mode — keep their placeholder text dark/faint. */
+html[data-theme="light"] .tf360-profile-drawer input::placeholder { color: rgba(10,10,10,0.38) !important; }

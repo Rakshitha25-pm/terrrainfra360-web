@@ -1,0 +1,17 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+.env*.local
+# Local clutter / leftovers — keep them out of the repo
+_movetest/
+_original_shop_backup/
+rakshithapm-new-web/
+/src/src/
+__*.mjs
+fix_*.cjs
+*.tsbuildinfo
