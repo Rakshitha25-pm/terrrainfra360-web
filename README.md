@@ -1,20 +1,41 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# TerraInfra360
 
-# Run and deploy your AI Studio app
+Web app for the TerraInfra360 construction & real‑estate platform. Built with React 19, Vite, Tailwind CSS, and Firebase.
 
-This contains everything you need to run your app locally.
+## Prerequisites
 
-View your app in AI Studio: https://ai.studio/apps/ae7abdca-a842-4a4f-82e2-08b6d025c2ce
+- Node.js 18+ and npm
 
-## Run Locally
+## Installation
 
-**Prerequisites:**  Node.js
+```bash
+npm install
+```
 
+## Run
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+npm run dev
+```
+
+Runs at **http://localhost:3000**. The Firebase config is built in, so it works out of the box.
+
+## Build
+
+```bash
+npm run build     # production build to dist/
+npm run preview   # preview the production build
+```
+
+## Configuration (optional)
+
+To use your own Firebase project, create a `.env.local` file in the project root:
+
+```
+VITE_FIREBASE_API_KEY=your_key
+VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your_project
+VITE_FIREBASE_STORAGE_BUCKET=your_project.firebasestorage.app
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+```
